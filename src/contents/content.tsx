@@ -63,27 +63,28 @@ const PlasmoOverlay = ({anchor}) => {
     console.log(anchor.element)
 
     const handleRephrase = () => {
+        setResponse(null)
+        setSentGrammarPrompt(false)
         setSentRephrasePrompt(true)
         setSelected(document.getSelection().toString());
         const pro = 'Rephrase this text adn return me only the new text:' + document.getSelection().toString()
         gptService.sendPrompt(pro).then(res => {
             console.log(res)
             setResponse(res)
-        }).catch(console.error).finally(() =>
-            setRephraseResponse(false)
-        );
+        }).catch(console.error)
     };
 
     const handleGrammarCheck = () => {
+        setResponse(null)
+        setSentRephrasePrompt(false)
         setSentGrammarPrompt(true)
+
         setSelected(document.getSelection().toString());
         const pro = 'Fix the grammar mistakes on this text and return me only the new text:' + document.getSelection().toString()
         gptService.sendPrompt(pro).then(res => {
             console.log(res)
             setResponse(res)
-        }).catch(console.error).finally(() =>
-            setSentGrammarPrompt(false)
-        );
+        }).catch(console.error)
     };
 
 
@@ -106,7 +107,6 @@ const PlasmoOverlay = ({anchor}) => {
                             display: 'flex',
                             alignItems: 'center',
                             width: '30rem',
-                            border: (theme) => `1px solid ${theme.palette.divider}`,
                             borderRadius: 1,
                             bgcolor: 'background.paper',
                             color: 'text.secondary',
@@ -119,7 +119,7 @@ const PlasmoOverlay = ({anchor}) => {
                                     placeholder="Placeholder"
                                     fullWidth
                                     multiline
-                                    rows={4}
+                                    rows={5}
                                     value={selected}
                                 />
                                 <Divider orientation="vertical" flexItem/>
@@ -127,41 +127,39 @@ const PlasmoOverlay = ({anchor}) => {
                                         id="filled-textarea"
                                         multiline
                                         fullWidth
-                                        rows={4}
+                                        rows={5}
                                         value={rephraseResponse}
                                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                                             setRephraseResponse(event.target.value);
                                         }}
                                     /> :
-                                    <Skeleton height={120} width={400}
+                                    <Skeleton height={150} width={450}
                                               variant="rounded"/>}</>
                             </> :
                             null
                         }
-                        {sentGrammarPrompt ? <><TextField
-                                id="outlined-textarea"
-                                label="Multiline Placeholder"
-                                placeholder="Placeholder"
-                                fullWidth
-                                multiline
-                                rows={4}
-                                value={selected}
-                            />
+                        {sentGrammarPrompt ? <>
+                                <TextField
+                                    id="outlined-textarea"
+                                    label="Your Text"
+                                    fullWidth
+                                    multiline
+                                    rows={5}
+                                    value={selected}
+                                />
                                 <Divider orientation="vertical" flexItem/>
-                                <div>{grammarResponse ? <TextField
+                                <>{grammarResponse ? <TextField
                                         id="filled-textarea"
-                                        label="Response"
                                         multiline
                                         fullWidth
-                                        rows={4}
+                                        rows={5}
                                         value={grammarResponse}
                                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                                             setGrammarResponse(event.target.value);
                                         }}
                                     /> :
-                                    <Skeleton height={120} width={400}
-                                              variant="rounded"/>
-                                }</div>
+                                    <Skeleton height={150} width={450}
+                                              variant="rounded"/>}</>
                             </> :
                             null
                         }
