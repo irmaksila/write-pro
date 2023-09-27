@@ -1,0 +1,75 @@
+Index: src/contents/plasmo.ts
+===================================================================
+diff --git a/src/contents/plasmo.ts b/src/contents/plasmo.ts
+deleted file mode 100644
+--- a/src/contents/plasmo.ts	(revision a49a1fe077998368ff1cf0b9c075a258563b436f)
++++ /dev/null	(revision a49a1fe077998368ff1cf0b9c075a258563b436f)
+@@ -1,11 +0,0 @@
+-import type { PlasmoCSConfig } from "plasmo"
+-
+-export const config: PlasmoCSConfig = {
+-  matches: ["https://www.plasmo.com/*"]
+-}
+-
+-window.addEventListener("load", () => {
+-  console.log("content script loaded")
+-
+-  document.body.style.background = "pink"
+-})
+Index: src/popup.tsx
+===================================================================
+diff --git a/src/popup.tsx b/src/popup.tsx
+deleted file mode 100644
+--- a/src/popup.tsx	(revision a49a1fe077998368ff1cf0b9c075a258563b436f)
++++ /dev/null	(revision a49a1fe077998368ff1cf0b9c075a258563b436f)
+@@ -1,22 +0,0 @@
+-import { useState } from "react"
+-
+-function IndexPopup() {
+-  const [data, setData] = useState("")
+-
+-  return (
+-    <div
+-      style={{
+-        display: "flex",
+-        flexDirection: "column",
+-        padding: 16
+-      }}>
+-      <h1>
+-        Welcome to your <a href="https://www.plasmo.com">Plasmo</a> Extension!
+-      </h1>
+-      <input onChange={(e) => setData(e.target.value)} value={data} />
+-      <footer>Crafted by @PlamoHQ</footer>
+-    </div>
+-  )
+-}
+-
+-export default IndexPopup
+Index: src/style.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.new-tab {\n  background-color: #f0f0f0;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  color: #333;\n  display: block;\n  font-size: 12px;\n  line-height: 16px;\n  margin: 0 0 10px;\n  padding: 10px;\n  position: relative;\n  text-decoration: none;\n  width: 100%;\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/style.css b/src/style.css
+--- a/src/style.css	(revision a49a1fe077998368ff1cf0b9c075a258563b436f)
++++ b/src/style.css	(date 1695522820810)
+@@ -1,3 +1,4 @@
++
+ .new-tab {
+   background-color: #f0f0f0;
+   border: 1px solid #ccc;
+@@ -13,3 +14,11 @@
+   text-decoration: none;
+   width: 100%;
+ }
++
++.pop-up {
++  min-width: 10rem;
++
++}
++.pink{
++  background: pink;
++}
+\ No newline at end of file
